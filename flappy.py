@@ -83,32 +83,10 @@ for i in range(pop_size):
     pop_fitness.append(0) # every inidividual starts with a fitness of 0.
 
 ##### TODO #####
-# 0. showGameOverScreen() DONE
-# 1. saving DONE
-# 2. crossover DONE
-# 3. mutation DONE
-# 4. getAction DONE
-# 5. alter iterations in neuralNetwork.py DONE
-# 6. create method for getting/setting weights/bias neuralNetwork.py DONE
-# 7. elite clones DONE
-# 8. option to turn off graphics --> not important, as pygame is needed.
-# 9. increase distance between pipes, so that we can get a perfect game DONE
-# 10. add alive and generation numbers to display DONE
-# 11. allow for different network sizes --> input DONE
-#       --> hidden layer DONE
-#       --> number and size of hidden layers DONE
-# 12. allow for two types of crossover. DONE
-# 13. implement always flap strategy (1) DONE
-# 14. implement never flap strategy (2) DONE
-# 15. implement random flap strategy (3) DONE
-# 16. tanh
-# 17. generalization? can i make it so that pipe holes are all the same? DONE
-# 18. adjust FPS with up/down arrow keys DONE
-# 19. allow for random number of hidden layer and sizes. DONE
-
-# - NN --> create dataset where if we are lower than the hole, flap. If above,
-#   not flap. --> can i create this dataset in excel? randomly generate holes
-#   and position of bird. assign flap/no flap values to the sets.
+# 0. tanh
+# 1. NN --> create dataset where if we are lower than the hole, flap. If above,
+#    not flap. --> can i create this dataset in excel? randomly generate holes
+#    and position of bird. assign flap/no flap values to the sets.
 ##### END #####
 
 def main():
