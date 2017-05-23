@@ -37,39 +37,6 @@ class NeuralNetwork:
 					for k in range(self.layers[i - 1]):
 						self.weights[-1][j][k] = random.uniform(-1, 1)
 
-	# def mutate(self, rate):
-	# 	"""
-	# 	Mutates the weights and biases of the network according to a given
-	# 	rate.
-	# 	"""
-	# 	for i in range(1, len(self.layers)):
-	# 		for j in range(self.layers[i]):
-	# 			if random.random() < rate:
-	# 				# Mutate bias.
-	# 				self.bias[i - 1][j][0] = np.random.normal(0, 0.5)
-	# 			for k in range(self.layers[i - 1]):
-	# 				if random.random() < rate:
-	# 					# Mutate weight.
-	# 					self.weights[i - 1][j][k] = np.random.normal(0, 0.5)
-
-	# def crossover(self, individual):
-	# 	"""
-	# 	Crossover the network with the given individual.
-	# 	"""
-	# 	# Store weights/bias temporarily.
-	# 	old_weights = self.weights[0]
-	# 	old_bias = self.bias[0]
-
-	# 	# Get weights/bias from individual.
-	# 	ind_weights, ind_bias = individual.getWeightsAndBias()
-		
-	# 	# Swap weights/bias.
-	# 	self.weights[0] = ind_weights[0]
-	# 	self.bias[0] = ind_bias[0]
-	# 	ind_weights[0] = old_weights
-	# 	ind_bias[0] = old_bias
-	# 	individual.setWeightsAndBias(ind_weights, ind_bias)
-
 	def feedForward(self, result):
 		"""
 		Feeds forward an example through the network.
