@@ -423,7 +423,7 @@ def showGameOverScreen():
     generation += 1
 
     # now that we have updated the fitnesses, we save the population.
-    if generation % save_gen == 0:
+    if save_gen != 0 and generation % save_gen == 0:
         savePopulation()
 
     return
