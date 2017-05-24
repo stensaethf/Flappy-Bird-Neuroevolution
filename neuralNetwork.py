@@ -3,7 +3,7 @@
 # Frederik Roenn Stensaeth.
 # 05.17.17
 
-import numpy as np, random, cPickle, sys
+import numpy as np, random, cPickle, sys, data
 from copy import deepcopy
 
 class NeuralNetwork:
@@ -53,11 +53,146 @@ class NeuralNetwork:
 			acts.append(result)
 		return thresholds, acts
 
+	def backpropagate(self, example, label):
+		"""
+		Performs backpropagation on an example and label.
+		Updates the weights and biases in the neural network by propagating
+		backwards the change calculated for the output layer.
+		"""
+		# Find changes that needs to be made to the weights and biases.
+		weights_change, bias_change = self.getWeightsChange(example, label)
+
+		# Update every weight and bias in network with the found changes.
+		for l in range(len(self.layers) - 1):
+			self.weights[l] = (
+				self.weights[l] + 
+				self.alpha * weights_change[l]
+			)
+			self.bias[l] = (
+				self.bias[l] + 
+				self.alpha * bias_change[l]
+			)
+
+	def getWeightsChange(self, x, y):
+		"""
+		Calcualates the changes needed to be made to each weight and bias
+		given an x (example) and a y (label).
+		"""
+		# Feed forward the x value to find thresholds and activations.
+		thresholds, acts = self.feedForward(x)
+
+		# Propagate deltas backward from output layer to input layer.
+		# Start by calculating the deltas of the output layer.
+		delta = (
+			self.sigmoidPrime(thresholds[-1]) *
+			self.error(y, acts[-1])
+		)
+
+		# Each bias and weight has a change associated with it, so
+		# let's create matrices of the same structure as we already have.
+		weights_change = []
+		for weights in self.weights:
+			weights_change.append(np.zeros(weights.shape))
+
+		bias_change = []
+		for bias in self.bias:
+			bias_change.append(np.zeros(bias.shape))
+
+		# The change made to the weights are the dot product of the
+		# delta for that layer and the activations of the previous
+		# layer.
+		# Activations for biases are always 1, so the change needed
+		# is just the delta.
+		weights_change[-1] = np.dot(delta, acts[-2].transpose())
+		bias_change[-1] = delta
+
+		# Now we want to find the changes needed to be made to the
+		# rest of the weights and biases and apply them.
+		for l in range(2, len(self.layers)):
+			delta = (
+				self.sigmoidPrime(thresholds[-l]) *
+				np.dot(self.weights[-l + 1].transpose(), delta)
+			)
+
+			bias_change[-l] = delta
+			weights_change[-l] = np.dot(delta, acts[-l - 1].transpose())
+
+		return weights_change, bias_change
+
+	def train(self, examples, labels, alpha, iterations):
+		"""
+		Trains the weights and biases of the neural network using examples
+		and labels.
+		"""
+		self.iterations = iterations
+		for t in range(self.iterations):
+			# Calculate decaying alpha.
+			self.alpha = alpha - (alpha * t / self.iterations)
+
+			# Shuffle the data so that we see the data in different
+			# orders while training.
+			examples, labels = self.doubleShuffle(examples, labels)
+
+			for e in range(len(examples)):
+				# Backpropogate the example and label.
+				self.backpropagate(examples[e], labels[e])
+
+			# Check how many examples we classify correctly.
+			self.numberCorrect(examples, labels)
+
+	def error(self, label, activation):
+		"""
+		Calculates the difference between a label and an activation.
+		"""
+		return (label - activation)
+
+	def numberCorrect(self, images, labels):
+		"""
+		Classifies a given set of images and labels using the trained
+		weights and biases. Prints the number of correct classifications.
+		"""
+		count = 0
+		for i in range(len(images)):
+			image = images[i]
+			label = labels[i]
+
+			# Feed forward the image.
+			thresholds, acts = self.feedForward(image)
+			index = np.argmax(acts[-1])
+			label_index = np.argmax(label)
+
+			# Check whether the classification was correct.
+			if index == label_index:
+				count += 1
+
+		print str(count) + "/" + str(len(images))
+
+	def doubleShuffle(self, list1, list2):
+		"""
+		Shuffles two corresponding lists of equal length.
+		"""
+		list1_new = []
+		list2_new = []
+		index_shuf = range(len(list1))
+		# Randomly shuffle the input
+		random.shuffle(index_shuf)
+		for i in index_shuf:
+			list1_new.append(list1[i])
+			list2_new.append(list2[i])
+
+		return list1_new, list2_new
+
 	def sigmoid(self, x):
 		"""
 		Calculates the sigmoid value for a given x.
 		"""
 		return 1.0 / (1 + np.exp(-x))
+
+	def sigmoidPrime(self, x):
+		"""
+		Calculates the sigmoid prime value for a given x.
+		"""
+		return self.sigmoid(x) * (1.0 - self.sigmoid(x))
 
 	def saveWeightsAndBias(self, filename):
 		"""
@@ -107,3 +242,17 @@ class NeuralNetwork:
 		Checks if network is empty.
 		"""
 		return self.weights == [] and self.bias == []
+
+def main():
+	alpha = 0.3
+	layers = [3, 7, 1]
+	iterations = 10
+
+	data.genData(10000)
+	train_inputs, train_outputs = data.loadData(layers)
+
+	network = NeuralNetwork(layers)
+	network.train(train_inputs, train_outputs, alpha, iterations)
+
+if __name__ == '__main__':
+	main()
