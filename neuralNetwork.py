@@ -124,10 +124,10 @@ class NeuralNetwork:
 		Trains the weights and biases of the neural network using examples
 		and labels.
 		"""
-		self.iterations = iterations
-		for t in range(self.iterations):
+		iterations = iterations
+		for t in range(iterations):
 			# Calculate decaying alpha.
-			self.alpha = alpha - (alpha * t / self.iterations)
+			self.alpha = alpha - (alpha * t / iterations)
 
 			# Shuffle the data so that we see the data in different
 			# orders while training.
@@ -161,9 +161,18 @@ class NeuralNetwork:
 			index = np.argmax(acts[-1])
 			label_index = np.argmax(label)
 
+			# print label[0][0]
+			# print acts[-1][0][0]
+
 			# Check whether the classification was correct.
-			if index == label_index:
-				count += 1
+			if label[0][0] == 1.0:
+				if acts[-1][0][0] > 0.5:
+					# we found that we should flap --> correct.
+					count += 1
+			else:
+				if acts[-1][0][0] <= 0.5:
+					# we found that we should not flap --> correct.
+					count += 1
 
 		print str(count) + "/" + str(len(images))
 
