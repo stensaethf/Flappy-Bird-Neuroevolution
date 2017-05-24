@@ -14,7 +14,7 @@ def genData(num):
 		else:
 			data.append([bird_height, hole_height, distance, 0.0])
 
-	cPickle.dump(data, open('data/flappyBirdData.pkl', 'wb'))
+	cPickle.dump(data, open('data/flappyBirdData.pickle', 'wb'))
 
 def loadData(structure):
 	"""
@@ -23,7 +23,7 @@ def loadData(structure):
 	# structure = [x, y, ..., z]
 	# flappyBirdData.pkl --> 
 	# 	[[bird height, hole height, distance, flap/no flap], ...]
-	data = cPickle.load(open('data/flappyBirdData.pkl', 'rb'))
+	data = cPickle.load(open('data/flappyBirdData.pickle', 'rb'))
 	return reshape(data, structure)
 
 def reshape(data, structure):
