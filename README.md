@@ -18,6 +18,6 @@ Note: tags with a single dash require a value after it (example: -p 20 -c 0.5). 
 | -n                  | 3/7/1   | Structure. Form: x/y/.../z (x is number of inputs, y is number of nodes in first hidden layer, z is number of outputs). Requires 2 or 3 inputs and 1 ouput. |
 | -p                  | 50      | Population size. Range: [2,]. |
 | -s                  | 0       | Strategy. 0: neural networks, 1: always flap, 2: never flap, 3: randomly flap. |
-| --crossover-section | n/a     | Crossover section. Crossover a random section of the genome instead of the first hidden layer. |
-| --random-nn         | n/a     | Random neural networks. Population will consist of neural networks of varying structures. Crossover is automatically set to --crossover-section. |
-| --perfect           | n/a     | Perfect game. Increases the distance between pipes so that it is possible to have a perfect game (never die). |
+| --crossover-section | off     | Crossover section. Crossover a random section of the genome instead of the first hidden layer. |
+| --random-nn         | off     | Random neural networks. Population will consist of neural networks of varying structures. Crossover is automatically set to --crossover-section. |
+| --perfect           | off     | Perfect game. Increases the distance between pipes so that it is possible to have a perfect game (never die). |

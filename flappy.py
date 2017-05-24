@@ -561,6 +561,7 @@ def getAction(num, distance, bird_height, hole_height):
     if strategy == 0:
         global population
         distance = distance / 450 - 0.5
+        # distance = distance / 450
         bird_height = min(bird_height, SCREENHEIGHT) / SCREENHEIGHT - 0.5
         hole_height = min(hole_height, SCREENHEIGHT) / SCREENHEIGHT - 0.5
         # bird_height = float(bird_height) / SCREENHEIGHT
@@ -740,7 +741,7 @@ def genRandomStructure():
         s.append(2)
 
     p = 1.0
-    while len(s) < 7 and p > 0.5:
+    while p > 0.5: #len(s) < 7 and p > 0.5:
         # Add a new layer of random size to the network.
         # Max layer size is 10 nodes.
         layer_size = random.randint(1, 10)
