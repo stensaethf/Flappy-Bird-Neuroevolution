@@ -146,23 +146,18 @@ class NeuralNetwork:
 		"""
 		return (label - activation)
 
-	def numberCorrect(self, images, labels):
+	def numberCorrect(self, inputs_list, labels):
 		"""
-		Classifies a given set of images and labels using the trained
+		Classifies a given set of inputs and labels using the trained
 		weights and biases. Prints the number of correct classifications.
 		"""
 		count = 0
-		for i in range(len(images)):
-			image = images[i]
+		for i in range(len(inputs_list)):
+			inputs = inputs_list[i]
 			label = labels[i]
 
-			# Feed forward the image.
-			thresholds, acts = self.feedForward(image)
-			index = np.argmax(acts[-1])
-			label_index = np.argmax(label)
-
-			# print label[0][0]
-			# print acts[-1][0][0]
+			# Feed forward the inputs.
+			thresholds, acts = self.feedForward(inputs)
 
 			# Check whether the classification was correct.
 			if label[0][0] == 1.0:
@@ -174,7 +169,7 @@ class NeuralNetwork:
 					# we found that we should not flap --> correct.
 					count += 1
 
-		print str(count) + "/" + str(len(images))
+		print str(count) + "/" + str(len(inputs_list))
 
 	def doubleShuffle(self, list1, list2):
 		"""
