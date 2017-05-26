@@ -71,6 +71,7 @@ pipe_next_height = None
 population = []
 pop_fitness = []
 pop_size = 50
+print_stats = False
 save_gen = 1
 strategy = 0
 structure = [3, 7, 1]
@@ -405,8 +406,6 @@ def showGameOverScreen():
         parent2_new = neuralNetwork.NeuralNetwork(parent2.getStructure(), True)
         parent1_new.setWeightsAndBias(values1[0], values1[1])
         parent2_new.setWeightsAndBias(values2[0], values2[1])
-        # new_gen.append(values1)
-        # new_gen.append(values2)
         new_gen.append(parent1_new)
         new_gen.append(parent2_new)
 
@@ -414,6 +413,20 @@ def showGameOverScreen():
     # be the case because we added both offspring to the population.
     if len(new_gen) != pop_size:
         new_gen = new_gen[:-1]
+
+    if print_stats:
+        # Prints generation, min, max, average fitness of population.
+        stats = '{},{},{},{}\n'.format(
+            generation,
+            min(pop_fitness),
+            max(pop_fitness),
+            sum(pop_fitness) / float(pop_size),
+        )
+        type_w = 'a'
+        if generation == 0:
+            type_w = 'w'
+        with open('data/results.txt', type_w) as file:
+            file.write(stats)
 
     # reset fitness and update the population of the neural networks.
     for i in range(pop_size):
@@ -833,6 +846,9 @@ if __name__ == '__main__':
             # Increased distance between pipes so that it is possible to
             # guarantee a perfect game (never die).
             perfect_game = True
+        elif arg == '--print':
+            # Prints fitness values after each generation.
+            print_stats = True
         else:
             print 'Invalid command line arguments.'
             sys.exit()
