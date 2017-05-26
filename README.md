@@ -21,3 +21,4 @@ Note: tags with a single dash require a value after it (example: -p 20 -c 0.5). 
 | --crossover-section | off     | Crossover section. Crossover a random section of the genome instead of the first hidden layer. |
 | --random-nn         | off     | Random neural networks. Population will consist of neural networks of varying structures. Crossover is automatically set to --crossover-section. |
 | --perfect           | off     | Perfect game. Increases the distance between pipes so that it is possible to have a perfect game (never die). |
+| --print             | off     | Print. Saves the generation number, min fitness, max fitness and average fitness for each generation in data/results.txt |
