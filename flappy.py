@@ -415,18 +415,7 @@ def showGameOverScreen():
         new_gen = new_gen[:-1]
 
     if print_stats:
-        # Prints generation, min, max, average fitness of population.
-        stats = '{},{},{},{}\n'.format(
-            generation,
-            min(pop_fitness),
-            max(pop_fitness),
-            sum(pop_fitness) / float(pop_size),
-        )
-        type_w = 'a'
-        if generation == 0:
-            type_w = 'w'
-        with open('data/results.txt', type_w) as file:
-            file.write(stats)
+        saveResultsToFile()
 
     # reset fitness and update the population of the neural networks.
     for i in range(pop_size):
@@ -764,6 +753,24 @@ def genRandomStructure():
     # Output layer has a single node.
     s.append(1)
     return s
+
+def saveResultsToFile():
+    """
+    Saves generation, min, max, average fitness of population for each
+    generation.
+    """
+    stats = '{},{},{},{}\n'.format(
+        generation,
+        min(pop_fitness),
+        max(pop_fitness),
+        sum(pop_fitness) / float(pop_size),
+    )
+    type_w = 'a'
+    if generation == 0:
+        # Overwrite existing file for each new run of flappy.py.
+        type_w = 'w'
+    with open('data/results.txt', type_w) as file:
+        file.write(stats)
 
 if __name__ == '__main__':
     i = 1
