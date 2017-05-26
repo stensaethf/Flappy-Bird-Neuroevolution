@@ -431,7 +431,9 @@ def showGameOverScreen():
     return
 
 def getRandomPipe():
-    """returns a randomly generated pipe"""
+    """
+    Returns a randomly generated pipe.
+    """
     # y of gap between upper and lower pipe
     if difficulty_game == 0:
         gapY = 0
@@ -450,7 +452,9 @@ def getRandomPipe():
 
 
 def showScore(score):
-    """displays score in center of screen"""
+    """
+    Displays score in center of screen.
+    """
     scoreDigits = [int(x) for x in list(str(score))]
     totalWidth = 0 # total width of all numbers to be printed
 
@@ -493,7 +497,9 @@ def showGen():
 
 
 def checkCrash(players, upperPipes, lowerPipes):
-    """returns True if player collders with base or pipes."""
+    """
+    Returns True if player collders with base or pipes.
+    """
     individuals_crash = [False] * pop_size
 
     for i in range(pop_size):
@@ -504,8 +510,6 @@ def checkCrash(players, upperPipes, lowerPipes):
         # if player crashes into ground
         if players['y'][i] + players['h'] >= BASEY - 1:
             individuals_crash[i] = True
-
-        # XX do i need this else?
         else:
             playerRect = pygame.Rect(players['x'][i], players['y'][i],
                           players['w'], players['h'])
@@ -532,7 +536,9 @@ def checkCrash(players, upperPipes, lowerPipes):
     return individuals_crash
 
 def pixelCollision(rect1, rect2, hitmask1, hitmask2):
-    """Checks if two objects collide and not just their rects"""
+    """
+    Checks if two objects collide and not just their rects.
+    """
     rect = rect1.clip(rect2)
 
     if rect.width == 0 or rect.height == 0:
@@ -548,7 +554,9 @@ def pixelCollision(rect1, rect2, hitmask1, hitmask2):
     return False
 
 def getHitmask(image):
-    """returns a hitmask using an image's alpha."""
+    """
+    Returns a hitmask using an image's alpha.
+    """
     mask = []
     for x in xrange(image.get_width()):
         mask.append([])
