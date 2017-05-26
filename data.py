@@ -1,3 +1,8 @@
+# data.py
+# Code for generating/loading data for Flappy Bird.
+# Frederik Roenn Stensaeth
+# 05.26.17
+
 import sys, random, cPickle, numpy as np
 
 def genData(num):

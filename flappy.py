@@ -2,7 +2,7 @@
 # Flappy bird game with evolutionary neural networks.
 # Author: sourabhv
 # Modified by Frederik Roenn Stensaeth
-# 05.23.17
+# 05.26.17
 
 from itertools import cycle
 import random
