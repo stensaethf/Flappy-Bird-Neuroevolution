@@ -796,7 +796,7 @@ if __name__ == '__main__':
             i += 1
         elif arg == '-m':
             # Mutation rate.
-            # Default: 0.05.
+            # Default: 0.15.
             mutation_rate = float(sys.argv[i + 1])
             i += 1
         elif arg == '-c':
