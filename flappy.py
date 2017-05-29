@@ -83,13 +83,6 @@ for i in range(pop_size):
     population.append(individual)
     pop_fitness.append(0) # every inidividual starts with a fitness of 0.
 
-##### TODO #####
-# 0. tanh
-# 1. NN --> create dataset where if we are lower than the hole, flap. If above,
-#    not flap. --> can i create this dataset in excel? randomly generate holes
-#    and position of bird. assign flap/no flap values to the sets.
-##### END #####
-
 def main():
     global SCREEN, FPSCLOCK
     global pop_fitness
