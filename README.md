@@ -3,6 +3,13 @@ Flappy-Bird-Neuroevolution
 
 Neural networks learning to play Flappy Bird.
 
+#### Requirements
+pygame, numpy
+
+#### Usage
+python flappy.py [parameters]  
+python neuralNetwork.py \<num training data points\>
+
 #### Parameters
 Note: tags with a single dash require a value after it (example: -p 20 -c 0.5). Tags with a double dash should not have a value after it (example: --crossover-section --perfect).
 
