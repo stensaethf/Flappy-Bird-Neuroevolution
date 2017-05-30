@@ -252,11 +252,20 @@ def main():
 	layers = [3, 7, 1]
 	iterations = 10
 
-	data.genData(10000)
+	# Generate training data.
+	data.genData(int(sys.argv[1]))
 	train_inputs, train_outputs = data.loadData(layers)
 
+	# Train network.
 	network = NeuralNetwork(layers)
 	network.train(train_inputs, train_outputs, alpha, iterations)
+
+	# Generate testing data.
+	data.genData(10000)
+	test_inputs, test_outputs = data.loadData(layers)
+
+	# Check against testing data.
+	network.numberCorrect(test_inputs, test_outputs)
 
 if __name__ == '__main__':
 	main()
