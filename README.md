@@ -1,7 +1,17 @@
 Flappy-Bird-Neuroevolution
 ==========
 
-Neural networks learning to play Flappy Bird.
+Neural networks learning to play Flappy Bird (FlapPyBird).
+
+#### Requirements
+pygame, numpy
+
+#### Usage
+python flappy.py [parameters]  
+python neuralNetwork.py \<num training data points\>
+
+##### Note
+When running flappy.py you will get several warnings ("libpng warning: iCCP: known incorrect sRGB profile") - do not worry about this. This warning was part of the original FlapPyBird and has not been resolved or suppressed.
 
 #### Parameters
 Note: tags with a single dash require a value after it (example: -p 20 -c 0.5). Tags with a double dash should not have a value after it (example: --crossover-section --perfect).
