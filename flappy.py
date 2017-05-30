@@ -779,7 +779,7 @@ if __name__ == '__main__':
         arg = sys.argv[i]
         if arg == '-fps':
             # Frames per second.
-            # Default: 60.
+            # Default: 30.
             FPS = int(sys.argv[i + 1])
             i += 1
         elif arg == '-g':
