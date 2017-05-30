@@ -1,7 +1,7 @@
 # data.py
 # Code for generating/loading data for Flappy Bird.
 # Frederik Roenn Stensaeth
-# 05.26.17
+# 05.30.17
 
 import sys, random, cPickle, numpy as np
 
@@ -25,9 +25,6 @@ def loadData(structure):
 	"""
 	Function for loading the dataset.
 	"""
-	# structure = [x, y, ..., z]
-	# flappyBirdData.pkl --> 
-	# 	[[bird height, hole height, distance, flap/no flap], ...]
 	data = cPickle.load(open('data/flappyBirdData.pickle', 'rb'))
 	return reshape(data, structure)
 
@@ -36,7 +33,6 @@ def reshape(data, structure):
 	Function for reshaping the dataset. We want the inputs to be numpy arrays
 	of 3x1 or 2x1 and the outputs to be numpy arrays of 1x1.
 	"""
-	# structure = [x, y, ..., z]
 	reshaped_inputs = []
 	reshaped_outputs = []
 	for i in data:

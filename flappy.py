@@ -2,7 +2,7 @@
 # Flappy bird game with evolutionary neural networks.
 # Author: sourabhv
 # Modified by Frederik Roenn Stensaeth
-# 05.26.17
+# 05.30.17
 
 from itertools import cycle
 import random
@@ -329,13 +329,14 @@ def mainGame(movementInfo):
 
 
 def showGameOverScreen():
-    # Instead of showing the game over screen, we will now perform our
-    # selection, mutation and crossover.
+    """
+    Instead of showing the game over screen, we will now perform our
+    selection, mutation and crossover using fitness proportional selection.
+    """
     global pop_fitness
     global generation
     global population
 
-    # FITNESS PROPORTIONAL SELECTION
     new_gen = []
 
     # Make elite clones.
@@ -354,13 +355,14 @@ def showGameOverScreen():
 
             elites.append(elite_index)
 
+        # Acutally copy the elites.
         for i in elites:
-            # new_gen.append(population[i].getWeightsAndBias())
             elite_copy = neuralNetwork.NeuralNetwork(population[i].getStructure(), True)
             w, b = population[i].getWeightsAndBias()
             elite_copy.setWeightsAndBias(w, b)
             new_gen.append(elite_copy)
 
+    # Calculate proportional fitness percentages.
     total_fitness = float(sum(pop_fitness))
     prop_fitness = []
     for i in range(pop_size):
@@ -744,7 +746,7 @@ def genRandomStructure():
         s.append(2)
 
     p = 1.0
-    while p > 0.5: #len(s) < 7 and p > 0.5:
+    while p > 0.5:
         # Add a new layer of random size to the network.
         # Max layer size is 10 nodes.
         layer_size = random.randint(1, 10)

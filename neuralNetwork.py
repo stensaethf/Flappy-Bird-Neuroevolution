@@ -1,7 +1,7 @@
 # NeuralNetwork
 # Neural network implementation.
 # Frederik Roenn Stensaeth.
-# 05.17.17
+# 05.30.17
 
 import numpy as np, random, cPickle, sys, data
 from copy import deepcopy
@@ -248,6 +248,8 @@ class NeuralNetwork:
 		return self.weights == [] and self.bias == []
 
 def main():
+	# python neuralNetwork.py <num training data points>
+
 	alpha = 0.3
 	layers = [3, 7, 1]
 	iterations = 10
